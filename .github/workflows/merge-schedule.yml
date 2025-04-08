@@ -27,5 +27,5 @@ jobs:
           # Label to apply to the pull request if the merge fails. Default is
           # `automerge-fail`.
           automerge_fail_label: 'merge-schedule-failed'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #    env:
+    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
