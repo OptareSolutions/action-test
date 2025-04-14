@@ -1,0 +1,31 @@
+name: CI Kubernetes Security & Lint
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  detect-secrets:
+    name: Detect Secrets with Gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }} # opcional
+
+  lint-manifests:
+    name: Lint Kubernetes Manifests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run kube-linter
+        uses: stackrox/kube-linter-action@v1.0.6
+        with:
+          directory: manifests
+          config: .kube-linter/config.yaml  # opcional si tienes configuración personalizada
+          format: plain
