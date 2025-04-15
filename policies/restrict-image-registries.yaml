@@ -34,5 +34,5 @@ spec:
           =(initContainers):
           - image: "eu.foo.io/* | bar.io/*"
           containers:
-          - image: "docker.io/* | ghcr.io/*"
+          - image: "docker.io/* | ghcr.io/* | gcr.io/*"
 
