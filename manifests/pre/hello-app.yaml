@@ -1,31 +1,42 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-app-v1
+  name: hello-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      role: hello-app-v1
+      role: hello-app
   template:
     metadata:
       labels:
-        role: hello-app-v1
+        role: hello-app
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
       containers:
       - name: hello-app
         image: gcr.io/google-samples/hello-app:1.0
         ports:
         - containerPort: 8080
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+
 
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: hello-v1-svc
+  name: hello-svc
 spec:
   selector:
-    app: hello-app-v1
+    app: hello-app
   ports:
   - protocol: TCP
     port: 80
