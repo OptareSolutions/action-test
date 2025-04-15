@@ -12,12 +12,9 @@ spec:
       labels:
         role: hello-app
     spec:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
       containers:
       - name: hello-app
-        image: gcr.io/google-samples/hello-app:1.0
+        image: gcr.io/google-samples/hello-app:2.0
         ports:
         - containerPort: 8080
         resources:
@@ -27,3 +24,5 @@ spec:
           limits:
             cpu: "500m"
             memory: "512Mi"
+        securityContext:
+          runAsUser: 0
