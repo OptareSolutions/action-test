@@ -29,3 +29,19 @@ jobs:
         run: |
           kubeconform -summary -ignore-missing-schemas -ignore-filename-pattern '.github/*' -output json .
 
+  kyverno-validate:
+    name: Validate with Kyverno
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Test against Kyverno policies
+        uses: ckotzbauer/kyverno-test-action@v2
+        with:
+          resource-files: "manifests/*.yaml"
+          policy-files: |
+            https://raw.githubusercontent.com/kyverno/policies/main/pod-security/restricted/require-run-as-non-root-user/require-run-as-non-root-user.yaml
+            https://raw.githubusercontent.com/kyverno/policies/main/best-practices/restrict-image-registries/restrict-image-registries.yaml
+            https://raw.githubusercontent.com/kyverno/policies/main/best-practices/require-pod-requests-limits/require-pod-requests-limits.yaml
+
