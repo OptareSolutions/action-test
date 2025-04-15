@@ -18,12 +18,14 @@ jobs:
           GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
 
   lint:
+    name: Validate Kubernetes Manifests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: yokawasa/action-setup-kube-tools@v0.11.2
         with:
           kubeconform: '0.5.0'
-      - run: |
+      - name: Validate Kubernetes manifests
+        run: |
           kubeconform -summary -ignore-missing-schemas -ignore-filename-pattern '.github/*' -output json .
 
