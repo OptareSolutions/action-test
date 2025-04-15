@@ -17,15 +17,14 @@ jobs:
         env:
           GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
 
-  lint-manifests:
-    name: Lint Kubernetes Manifests
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Run kube-linter
-        uses: stackrox/kube-linter-action@v1.0.6
+      - uses: actions/checkout@v2
+      - uses: yokawasa/action-setup-kube-tools@v0.11.2
         with:
-          directory: manifests
-    #      config: .kube-linter/config.yaml 
-          format: plain
+          kubeconform: '0.5.0'
+      - run: |
+          kubeconform -v
+          kubeconform -summary -ignore-missing-schemas -output json .
+
