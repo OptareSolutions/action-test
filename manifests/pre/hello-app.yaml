@@ -27,16 +27,3 @@ spec:
           limits:
             cpu: "500m"
             memory: "512Mi"
-
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: hello-svc
-spec:
-  selector:
-    app: hello-app
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
