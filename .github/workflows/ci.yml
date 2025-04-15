@@ -49,7 +49,7 @@ jobs:
       
       - name: Validate manifests with Kyverno
         run: |
-          kyverno apply policies/ --resource manifests/
+          kyverno apply policies/ --resource manifests/**
           if [ $? -ne 0 ]; then
             echo "Validation failed: Some manifests do not comply with Kyverno policies"
             exit 1
