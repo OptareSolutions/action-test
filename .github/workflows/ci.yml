@@ -25,6 +25,5 @@ jobs:
         with:
           kubeconform: '0.5.0'
       - run: |
-          kubeconform -v
-          kubeconform -summary -ignore-missing-schemas -output json .
+          kubeconform -summary -ignore-missing-schemas -ignore-filename-pattern '.github/*' -output json .
 
