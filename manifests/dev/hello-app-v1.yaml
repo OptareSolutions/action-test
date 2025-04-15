@@ -12,9 +12,9 @@ spec:
       labels:
         role: hello-app-v1
     spec:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
+      # securityContext:
+      #   runAsNonRoot: true
+      #   runAsUser: 1000
       containers:
       - name: hello-app
         image: gcr.io/google-samples/hello-app:1.0
