@@ -12,10 +12,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run Gitleaks
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+      # - name: Run Gitleaks
+      #   uses: gitleaks/gitleaks-action@v2
+      #   env:
+      #     GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }} # Wait until get license
+
+      - name: Install Gitleaks
+        run: |
+          wget https://github.com/gitleaks/gitleaks/releases/download/v8.18.1/gitleaks_8.18.1_linux_x64.tar.gz
+          tar -xzf gitleaks_8.18.1_linux_x64.tar.gz
+          sudo mv gitleaks /usr/local/bin/
+
+      - name: Run Gitleaks manually
+        run: |
+          gitleaks detect --redact 100 --report-format json --report-path /dev/stdout
 
   lint:
     name: Validate Kubernetes Manifests
