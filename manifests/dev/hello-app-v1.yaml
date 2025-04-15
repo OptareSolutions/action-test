@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-app-v1
+  name: hello-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      role: hello-app-v1
+      role: hello-app
   template:
     metadata:
       labels:
-        role: hello-app-v1
+        role: hello-app
     spec:
       securityContext:
         runAsNonRoot: true
@@ -32,10 +32,10 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: hello-v1-svc
+  name: hello-svc
 spec:
   selector:
-    app: hello-app-v1
+    app: hello-app
   ports:
   - protocol: TCP
     port: 80
