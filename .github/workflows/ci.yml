@@ -27,5 +27,5 @@ jobs:
         uses: stackrox/kube-linter-action@v1.0.6
         with:
           directory: manifests
-          config: .kube-linter/config.yaml  # opcional si tienes configuración personalizada
+    #      config: .kube-linter/config.yaml 
           format: plain
