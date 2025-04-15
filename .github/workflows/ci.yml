@@ -39,7 +39,7 @@ jobs:
       - name: Test against Kyverno policies
         uses: ckotzbauer/kyverno-test-action@v2
         with:
-          resource-files: "manifests/*.yaml"
+          resource-files: "manifests/**/*.yaml"
           policy-files: |
             https://raw.githubusercontent.com/kyverno/policies/main/pod-security/restricted/require-run-as-non-root-user/require-run-as-non-root-user.yaml
             https://raw.githubusercontent.com/kyverno/policies/main/best-practices/restrict-image-registries/restrict-image-registries.yaml
