@@ -59,6 +59,6 @@ jobs:
       
       - name: Validate manifests with Kyverno
         run: |
-          kyverno apply policies/ --resource manifests/**
+          kyverno apply policies/ --resource manifests/pre/hello-app.yaml --resource manifests/dev/hello-app.yaml
 
 
