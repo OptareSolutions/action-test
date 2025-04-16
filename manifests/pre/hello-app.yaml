@@ -13,7 +13,8 @@ spec:
         role: hello-app
     spec:
       securityContext:
-        runAsUser: 0
+        runAsNonRoot: true
+        runAsUser: 1000
       containers:
       - name: hello-app
         image: gcr.io/google-samples/hello-app:2.0
